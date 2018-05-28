@@ -18,15 +18,15 @@
  */
 ?>
 
-<div class="islandora-video-object islandora" vocab="http://schema.org/" prefix="dcterms: http://purl.org/dc/terms/" typeof="VideoObject">
-  <div class="islandora-video-content-wrapper clearfix">
+<div class="islandora-remote-video-object islandora" vocab="http://schema.org/" prefix="dcterms: http://purl.org/dc/terms/" typeof="VideoObject">
+  <div class="islandora-remote-video-content-wrapper clearfix">
     <?php if ($islandora_content): ?>
-      <div class="islandora-video-content">
+      <div class="islandora-remote-video-content">
         <?php print $islandora_content; ?>
       </div>
     <?php endif; ?>
   </div>
-  <div class="islandora-video-metadata">
+  <div class="islandora-remote-video-metadata">
     <?php print $description; ?>
     <?php if ($parent_collections): ?>
       <div>

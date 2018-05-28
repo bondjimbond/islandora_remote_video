@@ -20,10 +20,12 @@ function islandora_remote_video_preprocess_islandora_remote_video(array &$variab
   $repository = $object->repository;
   // We should eventually remove the DC object and dc_array code as it only
   // exists to not break legacy implementations.
-
+  $variables['islandora_dublin_core'] = isset($dc_object) ? $dc_object : NULL;
+  $variables['dc_array'] = isset($dc_object) ? $dc_object->asArray() : array();
   $variables['islandora_object_label'] = $object->label;
   $variables['theme_hook_suggestions'][] = 'islandora_video__' . str_replace(':', '_', $object->id);
   $variables['parent_collections'] = islandora_get_parents_from_rels_ext($object);
+  $variables['metadata'] = islandora_retrieve_metadata_markup($object);
   $variables['description'] = islandora_retrieve_description_markup($object);
 
   $viewer_dsid = 'OBJ';
@@ -35,6 +37,13 @@ function islandora_remote_video_preprocess_islandora_remote_video(array &$variab
   if (isset($object[$viewer_dsid]) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object[$viewer_dsid])) {
     $embedded_video = $object[$viewer_dsid]->content;
   } 
+
+  // Thumbnail.
+  if (isset($object['TN']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object['TN'])) {
+    $video_params += array(
+      'tn' => url("islandora/object/{$object->id}/datastream/TN/view", array('absolute' => TRUE)),
+    );
+  }
 
   $variables['islandora_content'] = '';
   if ($embedded_video) {
