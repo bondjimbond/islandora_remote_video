@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * Islandora Remote Video
+ *
+ * Lets you "ingest" any remotely-hosted video and display it via its embed code.
+ */
+
+function islandora_remote_video_islandora_required_objects(IslandoraTuque $connection) {
+  $module_path = drupal_get_path('module', 'islandora_remote_video');
+  // Remote Video Video Content Model.
+  $remote_video_content_model = $connection->repository->constructObject('islandora:sp_remoteVideoCModel');
+  $remote_video_content_model->owner = 'fedoraAdmin';
+  $remote_video_content_model->label = 'Islandora Remote Video Content Model';
+  $remote_video_content_model->models = 'fedora-system:ContentModel-3.0';
+  // ISLANDORACM Datastream.
+  $datastream = $remote_video_content_model->constructDatastream('ISLANDORACM', 'X');
+  $datastream->label = 'Islandora content model';
+  $datastream->mimetype = 'text/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_remote_video_cmodel.xml", FALSE);
+  $remote_video_content_model->ingestDatastream($datastream);
+  // DS-COMPOSITE-MODEL Datastream.
+  $datastream = $remote_video_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
+  $datastream->label = 'DS-COMPOSITE-MODEL';
+  $datastream->mimetype = 'text/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_remote_video_ds_composite_model.xml", FALSE);
+  $remote_video_content_model->ingestDatastream($datastream);
+  // Remote Video Collection.
+  $remote_video_collection = $connection->repository->constructObject('islandora:remote_video_collection');
+  $remote_video_collection->owner = 'fedoraAdmin';
+  $remote_video_collection->label = 'Remote Video Collection';
+  $remote_video_collection->models = 'islandora:collectionCModel';
+  $remote_video_collection->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', 'islandora:root');
+  // Collection Policy Datastream.
+  $datastream = $remote_video_collection->constructDatastream('COLLECTION_POLICY', 'X');
+  $datastream->label = 'Collection policy';
+  $datastream->mimetype = 'text/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_remote_video_collection_policy.xml", FALSE);
+  $remote_video_collection->ingestDatastream($datastream);
+  // TN Datastream.
+  $datastream = $remote_video_collection->constructDatastream('TN', 'M');
+  $datastream->label = 'Thumbnail';
+  $datastream->mimetype = 'image/png';
+  $datastream->setContentFromFile("$module_path/images/folder.png", FALSE);
+  $remote_video_collection->ingestDatastream($datastream);
+  return array(
+    'islandora_remote_video' => array(
+      'title' => 'Islandora Remote Video',
+      'objects' => array(
+        $remote_video_content_model,
+        $remote_video_collection,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_ingest_steps().
+ */
+function islandora_remote_video_islandora_sp_remoteVideoCModel_islandora_ingest_steps() {
+  return array(
+    'islandora_remote_video_upload' => array(
+      'weight' => 5,
+      'type' => 'form',
+      'form_id' => 'islandora_remote_video_upload_form',
+      'module' => 'islandora_remote_video',
+      'file' => 'includes/remote_video_upload.form.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_remote_video_theme($existing, $type, $theme, $path) {
+  return array(
+    'islandora_remote_video' => array(
+      'template' => 'theme/islandora-remote-video',
+      'file' => 'theme/theme.inc',
+      'pattern' => 'islandora_remote_video__',
+      'variables' => array('object' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implements hook_CMODEL_PID_islandora_view_object().
+ */
+function islandora_remote_video_islandora_sp_remoteVideoCModel_islandora_view_object($object, $page_number, $page_size) {
+  $output = theme('islandora_remote_video', array('object' => $object));
+  return array('' => $output);
+}
