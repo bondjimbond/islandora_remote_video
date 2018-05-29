@@ -740,7 +740,7 @@ Enter date in the format YYYY-MM-DD.
           <disabled>FALSE</disabled>
           <executes_submit_callback>FALSE</executes_submit_callback>
           <multiple>FALSE</multiple>
-          <required>FALSE</required>
+          <required>TRUE</required>
           <resizable>FALSE</resizable>
           <title>URI</title>
           <tree>TRUE</tree>
