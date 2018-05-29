@@ -102,7 +102,7 @@ function islandora_remote_video_islandora_edit_datastream_registry($object, $dsi
     return array(
       array(
         'name' => t('Video Embed Code Edit Form'),
-        'content' => "islandora/object/{$object->id}/datastreams/remote_video/OBJ/edit",
+        'url' => "islandora/object/{$object->id}/datastreams/remote_video/OBJ/edit",
       ),
     );
   }
