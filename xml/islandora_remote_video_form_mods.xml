@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2">
+<definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3">
   <properties>
     <root_name>mods</root_name>
     <schema_uri>http://www.loc.gov/standards/mods/v3/mods-3-4.xsd</schema_uri>
@@ -16,7 +16,13 @@
       <attributes>
         <enctype>multipart/form-data</enctype>
       </attributes>
+      <collapsed>FALSE</collapsed>
+      <collapsible>FALSE</collapsible>
+      <disabled>FALSE</disabled>
+      <executes_submit_callback>FALSE</executes_submit_callback>
+      <multiple>FALSE</multiple>
       <required>FALSE</required>
+      <resizable>FALSE</resizable>
       <tree>TRUE</tree>
       <actions>
         <create>NULL</create>
@@ -118,7 +124,13 @@
         <properties>
           <type>tabs</type>
           <access>TRUE</access>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
           <required>FALSE</required>
+          <resizable>FALSE</resizable>
           <title>Name</title>
           <tree>TRUE</tree>
         </properties>
@@ -217,12 +229,19 @@
                 <properties>
                   <type>textfield</type>
                   <access>TRUE</access>
+                  <autocomplete_path>taxonomy/autocomplete/field_role_relators</autocomplete_path>
+                  <collapsed>FALSE</collapsed>
+                  <collapsible>FALSE</collapsible>
                   <description>Select a role from this vocabulary -
                                                   &lt;a
                                                   href="http://id.loc.gov/vocabulary/relators.html"
                                                   target="_blank"&gt;http://id.loc.gov/vocabulary/relators.html&lt;/a&gt;
                   </description>
+                  <disabled>FALSE</disabled>
+                  <executes_submit_callback>FALSE</executes_submit_callback>
+                  <multiple>FALSE</multiple>
                   <required>FALSE</required>
+                  <resizable>FALSE</resizable>
                   <title>Role</title>
                   <tree>TRUE</tree>
                   <actions>
@@ -234,8 +253,7 @@
                       <prefix>NULL</prefix>
                       <value>&lt;role&gt;&lt;roleTerm
                                                   authority="marcrelator"
-                                                  type="text"&gt;%value%&lt;/roleTerm&gt;&lt;/role&gt;
-                      </value>
+                                                  type="text"&gt;%value%&lt;/roleTerm&gt;&lt;/role&gt;</value>
                     </create>
                     <read>
                       <path>mods:role/mods:roleTerm</path>
@@ -287,6 +305,11 @@
         <properties>
           <type>select</type>
           <access>TRUE</access>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
           <options>
             <index key="">Select a Genre</index>
             <Actuality>Actuality</Actuality>
@@ -445,6 +468,7 @@
             <Yukon>Yukon</Yukon>
           </options>
           <required>FALSE</required>
+          <resizable>FALSE</resizable>
           <title>Genre</title>
           <tree>TRUE</tree>
           <user_data>
@@ -476,7 +500,13 @@
         <properties>
           <type>fieldset</type>
           <access>TRUE</access>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
           <required>FALSE</required>
+          <resizable>FALSE</resizable>
           <title>Origin Information</title>
           <tree>TRUE</tree>
           <actions>
@@ -501,10 +531,17 @@
             <properties>
               <type>textfield</type>
               <access>TRUE</access>
-              <description>Enter date in the format
-                                                  YYYY-MM-DD.
+              <collapsed>FALSE</collapsed>
+              <collapsible>FALSE</collapsible>
+              <description>The date that the resource was published, released, issued, performed, etc.
+
+Enter date in the format YYYY-MM-DD.
               </description>
-              <required>FALSE</required>
+              <disabled>FALSE</disabled>
+              <executes_submit_callback>FALSE</executes_submit_callback>
+              <multiple>FALSE</multiple>
+              <required>TRUE</required>
+              <resizable>FALSE</resizable>
               <title>Date Issued</title>
               <tree>TRUE</tree>
               <actions>
@@ -572,11 +609,10 @@
                   <schema/>
                   <type>xml</type>
                   <prefix>NULL</prefix>
-                  <value>&lt;place&gt;&lt;placeTerm authority='marccountry'&gt;%value%&lt;/placeTerm&gt;&lt;/place&gt;
-                  </value>
+                  <value>&lt;place&gt;&lt;placeTerm authority='marccountry'&gt;%value%&lt;/placeTerm&gt;&lt;/place&gt;</value>
                 </create>
                 <read>
-                  <path>mods:place/mods:placeTerm[@authority='marccountry']                  </path>
+                  <path>mods:place/mods:placeTerm[@authority='marccountry']</path>
                   <context>parent</context>
                 </read>
                 <update>
@@ -603,11 +639,10 @@
                   <type>xml</type>
                   <prefix>NULL</prefix>
                   <value>&lt;place&gt;&lt;placeTerm
-                                                  type="text"&gt;%value%&lt;/placeTerm&gt;&lt;/place&gt;
-                  </value>
+                                                  type="text"&gt;%value%&lt;/placeTerm&gt;&lt;/place&gt;</value>
                 </create>
                 <read>
-                  <path>mods:place/mods:placeTerm[@type = 'text']                  </path>
+                  <path>mods:place/mods:placeTerm[@type = 'text']</path>
                   <context>parent</context>
                 </read>
                 <update>
@@ -625,11 +660,18 @@
         <properties>
           <type>textfield</type>
           <access>TRUE</access>
-          <description>Select a three letter iso639-2b
-                                                  language code from
+          <autocomplete_path>taxonomy/autocomplete/field_languages</autocomplete_path>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <description>Select an iso639-2b
+                                                  language (text, not code) from
                                                   http://www.loc.gov/standards/iso639-2/php/code_list.php
           </description>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
           <required>FALSE</required>
+          <resizable>FALSE</resizable>
           <title>Language</title>
           <tree>TRUE</tree>
           <actions>
@@ -641,8 +683,7 @@
               <prefix>NULL</prefix>
               <value>&lt;language&gt;&lt;languageTerm
                                                   authority="iso639-2b"
-                                                  type="code"&gt;%value%&lt;/languageTerm&gt;&lt;/language&gt;
-              </value>
+                                                  type="text"&gt;%value%&lt;/languageTerm&gt;&lt;/language&gt;</value>
             </create>
             <read>
               <path>mods:language/mods:languageTerm</path>
@@ -689,11 +730,53 @@
         </properties>
         <children/>
       </element>
+      <element name="identifierURI">
+        <properties>
+          <type>textfield</type>
+          <access>TRUE</access>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <description>URI to the hosted video.</description>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
+          <required>FALSE</required>
+          <resizable>FALSE</resizable>
+          <title>URI</title>
+          <tree>TRUE</tree>
+          <actions>
+            <create>
+              <path>self::node()</path>
+              <context>parent</context>
+              <schema/>
+              <type>xml</type>
+              <prefix>NULL</prefix>
+              <value>&lt;identifier type="uri"&gt;%value%&lt;/identifier&gt;</value>
+            </create>
+            <read>
+              <path>mods:identifier[@type='uri']</path>
+              <context>parent</context>
+            </read>
+            <update>
+              <path>self::node()</path>
+              <context>self</context>
+            </update>
+            <delete>NULL</delete>
+          </actions>
+        </properties>
+        <children/>
+      </element>
       <element name="identifier">
         <properties>
           <type>textfield</type>
           <access>TRUE</access>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
           <required>FALSE</required>
+          <resizable>FALSE</resizable>
           <title>Identifier</title>
           <tree>TRUE</tree>
           <actions>
@@ -722,7 +805,13 @@
         <properties>
           <type>fieldset</type>
           <access>TRUE</access>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
           <required>FALSE</required>
+          <resizable>FALSE</resizable>
           <title>Physical Description</title>
           <tree>TRUE</tree>
           <actions>
@@ -747,40 +836,33 @@
             <properties>
               <type>select</type>
               <access>TRUE</access>
+              <collapsed>FALSE</collapsed>
+              <collapsible>FALSE</collapsible>
               <default_value>videorecording</default_value>
               <description>A designation of a particular
                                                   physical presentation of a resource, including the
                                                   physical form or medium of material for a
                                                   resource.
               </description>
+              <disabled>FALSE</disabled>
+              <executes_submit_callback>FALSE</executes_submit_callback>
+              <multiple>FALSE</multiple>
               <options>
                 <videorecording>videorecording</videorecording>
                 <unspecified>unspecified</unspecified>
-                <text>text</text>
-                <tactile_material>tactile
-                                                  material
-                </tactile_material>
-                <sound_recording>sound recording</sound_recording>
                 <index key="remote-sensing_image">remote-sensing
                                                   image
                 </index>
                 <projected_graphic>projected
                                                   graphic
                 </projected_graphic>
-                <notated_music>notated music</notated_music>
-                <nonprojected_graphic>nonprojected
-                                                  graphic
-                </nonprojected_graphic>
                 <motion_picture>motion picture</motion_picture>
-                <microform>microform</microform>
-                <map>map</map>
-                <kit>kit</kit>
-                <globe>globe</globe>
                 <electronic_resource>electronic
                                                   resource
                 </electronic_resource>
               </options>
               <required>FALSE</required>
+              <resizable>FALSE</resizable>
               <title>Form</title>
               <tree>TRUE</tree>
               <actions>
@@ -791,8 +873,7 @@
                   <type>xml</type>
                   <prefix>NULL</prefix>
                   <value>&lt;form
-                                                  authority="marccategory"&gt;%value%&lt;/form&gt;
-                  </value>
+                                                  authority="marccategory"&gt;%value%&lt;/form&gt;</value>
                 </create>
                 <read>
                   <path>mods:form</path>
@@ -811,7 +892,14 @@
             <properties>
               <type>textfield</type>
               <access>TRUE</access>
+              <collapsed>FALSE</collapsed>
+              <collapsible>FALSE</collapsible>
+              <description>For example: length of the production, number of discs, etc.</description>
+              <disabled>FALSE</disabled>
+              <executes_submit_callback>FALSE</executes_submit_callback>
+              <multiple>FALSE</multiple>
               <required>FALSE</required>
+              <resizable>FALSE</resizable>
               <title>Extent</title>
               <tree>TRUE</tree>
               <actions>
@@ -836,13 +924,55 @@
             </properties>
             <children/>
           </element>
+          <element name="quality">
+            <properties>
+              <type>textfield</type>
+              <access>TRUE</access>
+              <collapsed>FALSE</collapsed>
+              <collapsible>FALSE</collapsible>
+              <description>Notes about the quality of the film.</description>
+              <disabled>FALSE</disabled>
+              <executes_submit_callback>FALSE</executes_submit_callback>
+              <multiple>FALSE</multiple>
+              <required>FALSE</required>
+              <resizable>FALSE</resizable>
+              <title>Quality</title>
+              <tree>TRUE</tree>
+              <actions>
+                <create>
+                  <path>self::node()</path>
+                  <context>parent</context>
+                  <schema/>
+                  <type>element</type>
+                  <prefix>NULL</prefix>
+                  <value>quality</value>
+                </create>
+                <read>
+                  <path>mods:quality</path>
+                  <context>parent</context>
+                </read>
+                <update>
+                  <path>self::node()</path>
+                  <context>self</context>
+                </update>
+                <delete>NULL</delete>
+              </actions>
+            </properties>
+            <children/>
+          </element>
         </children>
       </element>
       <element name="note">
         <properties>
           <type>textarea</type>
           <access>TRUE</access>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
           <required>FALSE</required>
+          <resizable>FALSE</resizable>
           <title>Note</title>
           <tree>TRUE</tree>
           <actions>
@@ -871,9 +1001,14 @@
         <properties>
           <type>fieldset</type>
           <access>TRUE</access>
-          <collapsed>TRUE</collapsed>
+          <collapsed>FALSE</collapsed>
           <collapsible>TRUE</collapsible>
+          <description>Use LCSH subject headings.</description>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
           <required>FALSE</required>
+          <resizable>FALSE</resizable>
           <title>Subject</title>
           <tree>TRUE</tree>
           <actions>
@@ -898,7 +1033,13 @@
             <properties>
               <type>tags</type>
               <access>TRUE</access>
+              <collapsed>FALSE</collapsed>
+              <collapsible>FALSE</collapsible>
+              <disabled>FALSE</disabled>
+              <executes_submit_callback>FALSE</executes_submit_callback>
+              <multiple>FALSE</multiple>
               <required>FALSE</required>
+              <resizable>FALSE</resizable>
               <title>Topic</title>
               <tree>TRUE</tree>
             </properties>
@@ -907,7 +1048,13 @@
                 <properties>
                   <type>tag</type>
                   <access>TRUE</access>
+                  <collapsed>FALSE</collapsed>
+                  <collapsible>FALSE</collapsible>
+                  <disabled>FALSE</disabled>
+                  <executes_submit_callback>FALSE</executes_submit_callback>
+                  <multiple>FALSE</multiple>
                   <required>FALSE</required>
+                  <resizable>FALSE</resizable>
                   <tree>TRUE</tree>
                   <actions>
                     <create>
@@ -1318,10 +1465,16 @@
                 <properties>
                   <type>textfield</type>
                   <access>TRUE</access>
+                  <collapsed>FALSE</collapsed>
+                  <collapsible>FALSE</collapsible>
                   <description>Contains a statement of coordinates
                                                   covered by the resource.
                   </description>
+                  <disabled>FALSE</disabled>
+                  <executes_submit_callback>FALSE</executes_submit_callback>
+                  <multiple>FALSE</multiple>
                   <required>FALSE</required>
+                  <resizable>FALSE</resizable>
                   <title>Coordinates</title>
                   <tree>TRUE</tree>
                   <actions>
@@ -1354,9 +1507,147 @@
         <properties>
           <type>hidden</type>
           <access>TRUE</access>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
           <default_value>hiddenvalue</default_value>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
           <required>FALSE</required>
+          <resizable>FALSE</resizable>
           <tree>TRUE</tree>
+        </properties>
+        <children/>
+      </element>
+      <element name="rights_statement">
+        <properties>
+          <type>select</type>
+          <access>TRUE</access>
+          <autocomplete_path>taxonomy/autocomplete/rights_statements</autocomplete_path>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <description>A URI to an appropriate statement from Rightsstatements.org. View details at &lt;a href="http://rightsstatements.org/page/1.0/?language=en" target="_blank"&gt;http://rightsstatements.org&lt;/a&gt;</description>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
+          <options>
+            <index key="">No statement selected</index>
+            <index key="http://rightsstatements.org/vocab/NKC/1.0/">NO KNOWN COPYRIGHT</index>
+            <index key="http://rightsstatements.org/vocab/NoC-US/1.0/">NO COPYRIGHT - UNITED STATES</index>
+            <index key="http://rightsstatements.org/vocab/NoC-OKLR/1.0/">NO COPYRIGHT - OTHER KNOWN LEGAL RESTRICTIONS</index>
+            <index key="http://rightsstatements.org/vocab/NoC-NC/1.0/">NO COPYRIGHT - NON-COMMERCIAL USE ONLY</index>
+            <index key="http://rightsstatements.org/vocab/NoC-CR/1.0/">NO COPYRIGHT - CONTRACTUAL RESTRICTIONS</index>
+            <index key="http://rightsstatements.org/vocab/InC-RUU/1.0/">IN COPYRIGHT - RIGHTS-HOLDER(S) UNLOCATABLE OR UNIDENTIFIABLE</index>
+            <index key="http://rightsstatements.org/vocab/InC-NC/1.0/">IN COPYRIGHT - NON-COMMERCIAL USE PERMITTED</index>
+            <index key="http://rightsstatements.org/vocab/InC-OW-EU/1.0/">IN COPYRIGHT - EU ORPHAN WORK</index>
+            <index key="http://rightsstatements.org/vocab/InC-EDU/1.0/">IN COPYRIGHT - EDUCATIONAL USE PERMITTED</index>
+            <index key="http://rightsstatements.org/vocab/InC/1.0/">IN COPYRIGHT</index>
+            <index key="http://rightsstatements.org/vocab/UND/1.0/">COPYRIGHT UNDETERMINED</index>
+            <index key="http://rightsstatements.org/vocab/CNE/1.0/">COPYRIGHT NOT EVALUATED</index>
+          </options>
+          <required>FALSE</required>
+          <resizable>FALSE</resizable>
+          <title>Rights Statement</title>
+          <tree>TRUE</tree>
+          <user_data>
+            <index key=""/>
+          </user_data>
+          <actions>
+            <create>
+              <path>self::node()</path>
+              <context>document</context>
+              <schema/>
+              <type>xml</type>
+              <prefix>NULL</prefix>
+              <value>&lt;accessCondition type="use and reproduction" displayLabel="Rights Statement"&gt;%value%&lt;/accessCondition&gt;</value>
+            </create>
+            <read>
+              <path>mods:accessCondition[@type='use and reproduction'][@displayLabel='Rights Statement']</path>
+              <context>document</context>
+            </read>
+            <update>
+              <path>self::node()</path>
+              <context>self</context>
+            </update>
+            <delete>
+              <path>self::node()</path>
+              <context>self</context>
+            </delete>
+          </actions>
+        </properties>
+        <children/>
+      </element>
+      <element name="accessCondition">
+        <properties>
+          <type>textarea</type>
+          <access>TRUE</access>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <description>Additional information about the use and reproduction of the resource, including links to copyright information pages.</description>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
+          <required>FALSE</required>
+          <resizable>FALSE</resizable>
+          <title>Use and Reproduction</title>
+          <tree>TRUE</tree>
+          <actions>
+            <create>
+              <path>self::node()</path>
+              <context>parent</context>
+              <schema/>
+              <type>xml</type>
+              <prefix>NULL</prefix>
+              <value>&lt;accessCondition type="use and reproduction"&gt;%value%&lt;/accessCondition&gt;</value>
+            </create>
+            <read>
+              <path>mods:accessCondition[@type="use and reproduction"][not(@displayLabel)]</path>
+              <context>parent</context>
+            </read>
+            <update>
+              <path>self::node()</path>
+              <context>self</context>
+            </update>
+            <delete>NULL</delete>
+          </actions>
+        </properties>
+        <children/>
+      </element>
+      <element name="cc_license">
+        <properties>
+          <type>creative_commons</type>
+          <access>TRUE</access>
+          <collapsed>FALSE</collapsed>
+          <collapsible>FALSE</collapsible>
+          <disabled>FALSE</disabled>
+          <executes_submit_callback>FALSE</executes_submit_callback>
+          <multiple>FALSE</multiple>
+          <required>FALSE</required>
+          <resizable>FALSE</resizable>
+          <title>Creative Commons license</title>
+          <tree>TRUE</tree>
+          <actions>
+            <create>
+              <path>self::node()</path>
+              <context>document</context>
+              <schema/>
+              <type>xml</type>
+              <prefix>NULL</prefix>
+              <value>&lt;accessCondition type="use and reproduction" displayLabel="Creative Commons license"&gt;%value%&lt;/accessCondition&gt;</value>
+            </create>
+            <read>
+              <path>mods:accessCondition[@type='use and reproduction'][@displayLabel='Creative Commons license']</path>
+              <context>document</context>
+            </read>
+            <update>
+              <path>self::node()</path>
+              <context>self</context>
+            </update>
+            <delete>
+              <path>self::node()</path>
+              <context>self</context>
+            </delete>
+          </actions>
         </properties>
         <children/>
       </element>

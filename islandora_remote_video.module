@@ -79,6 +79,37 @@ function islandora_remote_video_islandora_required_objects(IslandoraTuque $conne
 }
 
 /**
+ * Implements hook_islandora_xml_form_builder_forms().
+ */
+function islandora_remote_video_islandora_xml_form_builder_forms() {
+  $module_path = drupal_get_path('module', 'islandora_remote_video');
+  return array(
+    'Islandora Remote Video Object MODS form' => array(
+      'form_file' => "$module_path/xml/islandora_remote_video_form_mods.xml",
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_xml_form_builder_form_associations().
+ */
+function islandora_remote_video_islandora_xml_form_builder_form_associations() {
+  return array(
+    'islandora_remote_video_mods_form' => array(
+      'content_model' => 'islandora:sp_remoteVideoCModel',
+      'form_name' => 'Islandora Remote Video Object MODS form',
+      'dsid' => 'MODS',
+      'title_field' => array(
+        'titleInfo', 'title',
+      ),
+      'transform' => 'mods_to_dc.xsl',
+      'self_transform' => 'cleanup_mods.xsl',
+      'template' => FALSE,
+    ),
+  );
+}
+
+/**
  * Implements hook_islandora_ingest_steps().
  */
 function islandora_remote_video_islandora_sp_remoteVideoCModel_islandora_ingest_steps() {
