@@ -1,11 +1,35 @@
 <?php
 
 /**
- * Islandora Remote Video
- *
+ * @file
  * Lets you "ingest" any remotely-hosted video and display it via its embed code.
  */
 
+/**
+ * Implements hook_menu().
+ */
+function islandora_remote_video_menu() {
+  $items = array();
+  $items['islandora/object/%islandora_object/datastreams/remote_video/OBJ/edit'] = array(
+    'title' => 'Edit Remote Video Embed Code',
+    'file' => 'includes/remote_video_edit.form.inc',
+    'page callback' => 'islandora_remote_video_edit_obj',
+    'page arguments' => array(2),
+    'access callback' => 'islandora_object_manage_access_callback',
+    'access arguments' => array(
+      array(
+        ISLANDORA_METADATA_EDIT,
+        ISLANDORA_ADD_DS,
+        ISLANDORA_PURGE,
+      ), 2),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_islandora_required_objects().
+ */
 function islandora_remote_video_islandora_required_objects(IslandoraTuque $connection) {
   $module_path = drupal_get_path('module', 'islandora_remote_video');
   // Remote Video Video Content Model.
@@ -67,6 +91,21 @@ function islandora_remote_video_islandora_sp_remoteVideoCModel_islandora_ingest_
       'file' => 'includes/remote_video_upload.form.inc',
     ),
   );
+}
+
+/**
+ * Implements hook_islandora_edit_datastream_registry().
+ */
+function islandora_remote_video_islandora_edit_datastream_registry($object, $dsid) {
+  if (in_array('islandora:sp_remoteVideoCModel', $object->models) &&
+    $dsid->id == 'OBJ') {
+    return array(
+      array(
+        'name' => t('Video Embed Code Edit Form'),
+        'content' => "islandora/object/{$object->id}/datastreams/remote_video/OBJ/edit",
+      ),
+    );
+  }
 }
 
 /**
