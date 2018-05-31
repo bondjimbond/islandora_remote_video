@@ -1,5 +1,5 @@
-name = Islandora Remote Video
-description = "Embed remotely-hosted content in Islandora."
+name = Islandora Remote Media
+description = "Embed remotely-hosted media content in Islandora."
 package = Islandora Extensions
 version = 7.x-dev
 core = 7.x
