@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess().
  */
-function islandora_remote_video_preprocess_islandora_remote_video(array &$variables) {
+function islandora_solution_pack_remote_media_preprocess_islandora_solution_pack_remote_media(array &$variables) {
   module_load_include('inc', 'islandora', 'includes/datastream');
   module_load_include('inc', 'islandora', 'includes/utilities');
   module_load_include('inc', 'islandora', 'includes/solution_packs');
@@ -30,27 +30,27 @@ function islandora_remote_video_preprocess_islandora_remote_video(array &$variab
 
   $viewer_dsid = 'OBJ';
 
-  $video_params = array(
+  $media_params = array(
     'pid' => $object->id,
   );
-  // Video player.
+  // Media player.
   if (isset($object[$viewer_dsid]) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object[$viewer_dsid])) {
-    $embedded_video = $object[$viewer_dsid]->content;
+    $embedded_media = $object[$viewer_dsid]->content;
   } 
 
   // Thumbnail.
   if (isset($object['TN']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object['TN'])) {
-    $video_params += array(
+    $media_params += array(
       'tn' => url("islandora/object/{$object->id}/datastream/TN/view", array('absolute' => TRUE)),
     );
   }
 
   $variables['islandora_content'] = '';
-  if ($embedded_video) {
-    $variables['islandora_content'] = $embedded_video;
+  if ($embedded_media) {
+    $variables['islandora_content'] = $embedded_media;
   }
   else {
     $variables['islandora_content'] = NULL;
   } 
-  return array('' => $embedded_video);
+  return array('' => $embedded_media);
 }
