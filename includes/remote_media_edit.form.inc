@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Remote video OBJ editing form.
+ * Remote Media OBJ editing form.
  */
 /**
  * Retrives the OBJ edit form.
@@ -12,19 +12,19 @@
  * @return array
  *   The form array.
  */
-function islandora_remote_video_edit_obj(AbstractObject $object) {
-  return drupal_get_form('islandora_remote_video_edit_obj_form', $object);
+function islandora_solution_pack_remote_media_edit_obj(AbstractObject $object) {
+  return drupal_get_form('islandora_solution_pack_remote_media_edit_obj_form', $object);
 }
 /**
  * Form callback.
  */
-function islandora_remote_video_edit_obj_form($form, &$form_state, AbstractObject $object) {
+function islandora_solution_pack_remote_media_edit_obj_form($form, &$form_state, AbstractObject $object) {
   $content = $object['OBJ']->content;
   return array(
     'content' => array(
       '#title' => t('Embed code'),
       '#type' => 'textarea',
-      '#description' => t('Embed code for the remote video.'),
+      '#description' => t('Embed code for the remote media.'),
       '#default_value' => $content,
     ),
     'object' => array(
@@ -43,7 +43,7 @@ function islandora_remote_video_edit_obj_form($form, &$form_state, AbstractObjec
 /**
  * From submit function.
  */
-function islandora_remote_video_edit_obj_form_submit($form, &$form_state) {
+function islandora_solution_pack_remote_media_edit_obj_form_submit($form, &$form_state) {
   $object = islandora_object_load($form_state['values']['object']);
   if (!$object['OBJ']) {
     $content = $object->constructDatastream('OBJ', 'M');
