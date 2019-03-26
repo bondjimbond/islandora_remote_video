@@ -1,3 +1,5 @@
+### This module has been deprecated. Please use [Islandora Remote Media](https://github.com/bondjimbond/islandora_remote_media).
+
 # Islandora Remote Video Solution Pack
 
 An Islandora Solution Pack that allows for ingesting and viewing videos that are hosted elsewhere on the web, using the video's embed code.
